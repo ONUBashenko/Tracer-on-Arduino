@@ -1,3 +1,4 @@
+/*
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <IRremote.h>
@@ -109,3 +110,4 @@ void loop()
 
   delay(200);
 }
+*/
