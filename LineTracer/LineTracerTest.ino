@@ -1,4 +1,3 @@
-/*
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <IRremote.h>
@@ -72,7 +71,7 @@ void loop()
   digitalWrite(IN4, HIGH);
   analogWrite(ENB, speedValue);
 
-  // === Обновление скорости
+  // === Обновление скорости (автоматическое)
   if (speedUp) {
     speedValue += speedStep;
     if (speedValue >= maxSpeed) speedUp = false;
@@ -86,15 +85,6 @@ void loop()
   sensorC = digitalRead(sensorCenter);
   sensorR = digitalRead(sensorRight);
 
-  // Вывод на дисплей
-  lcd.setCursor(0, 0);
-  lcd.print("L:");
-  lcd.print(sensorL);
-  lcd.print(" C:");
-  lcd.print(sensorC);
-  lcd.print(" R:");
-  lcd.print(sensorR);
-
   // IR-приём
   if (irrecv.decode(&results)) {
     Serial.print("IR: 0x");
@@ -105,9 +95,21 @@ void loop()
     lcd.print(results.value, HEX);
     lcd.print("     "); // затереть остаток
 
+    // Ниже закомментирована логика изменения скорости по нажатию пульта
+    /*
+    // Пример, как можно изменить скорость по кнопкам пульта (закомментировано)
+    if (results.value == 0xFFA25D) { // пример кода кнопки "вверх"
+      speedValue += speedStep;
+      if (speedValue > maxSpeed) speedValue = maxSpeed;
+    }
+    else if (results.value == 0xFF629D) { // пример кода кнопки "вниз"
+      speedValue -= speedStep;
+      if (speedValue < minSpeed) speedValue = minSpeed;
+    }
+    */
+
     irrecv.resume();
   }
 
   delay(200);
 }
-*/
