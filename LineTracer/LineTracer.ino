@@ -139,20 +139,18 @@ void setup()
    stopp();
 } 
 
-unsigned char old_SL,old_SM,old_SR;
-
 void loop() 
 { 
   Sensor_Scan();
   if (SM == HIGH)// middle sensor in black area
   {
-    if (SL == LOW & SR == HIGH) // black on left, white on right, turn left
+    if (SL == LOW && SR == HIGH) // black on left, white on right, turn left
     {
-      turnR();
+      turnR(); //turnL
     }
-    else if (SL == HIGH & SR == LOW) // white on left, black on right, turn right
+    else if (SL == HIGH && SR == LOW) // white on left, black on right, turn right
     {
-      turnL();
+      turnL(); //turnR
     }
     else // white on both sides, going forward
     {
@@ -161,13 +159,13 @@ void loop()
   }
   else // middle sensor on white area
   {
-    if (SL== LOW & SR == HIGH)// black on left, white on right, turn left
+    if (SL== LOW && SR == HIGH)// black on left, white on right, turn left
     {
-      turnR();
+      turnR(); //turnL
     }
-    else if (SL == HIGH & SR == LOW) // white on left, black on right, turn right
+    else if (SL == HIGH && SR == LOW) // white on left, black on right, turn right
     {
-      turnL();
+      turnL(); //turnR
     }
     else // all white, stop
     {
