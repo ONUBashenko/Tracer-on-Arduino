@@ -47,6 +47,7 @@ void Set_Speed(unsigned char Left,unsigned char Right)//setting function of spee
 
 void advance()     // going forwards
 {
+  Set_Speed(Lpwm_val, Rpwm_val);
   digitalWrite(pinRB,LOW);  // making motor move towards right rear
   digitalWrite(pinRF,HIGH);
   digitalWrite(pinLB,LOW);  //  making motor move towards left rear
@@ -56,7 +57,7 @@ void advance()     // going forwards
 void softTurnL() 
 {
   analogWrite(Lpwm_pin, 50); // замедлить левое колесо
-  analogWrite(Rpwm_pin, 120); 
+  analogWrite(Rpwm_pin, 200); 
   digitalWrite(pinRB, LOW);
   digitalWrite(pinRF, HIGH);
   digitalWrite(pinLB, LOW);
@@ -65,7 +66,7 @@ void softTurnL()
 
 void softTurnR() 
 {
-  analogWrite(Lpwm_pin, 120);
+  analogWrite(Lpwm_pin, 200);
   analogWrite(Rpwm_pin, 50); // замедлить правое колесо
   digitalWrite(pinRB, LOW);
   digitalWrite(pinRF, HIGH);
@@ -84,6 +85,7 @@ void stopp()         //stop
 
 void back()          //back
 {
+  Set_Speed(Lpwm_val, Rpwm_val);
   digitalWrite(pinRB,HIGH);  //making motor move towards right rear
   digitalWrite(pinRF,LOW);
   digitalWrite(pinLB,HIGH);  //making motor move towards left rear
