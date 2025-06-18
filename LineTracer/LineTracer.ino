@@ -56,8 +56,7 @@ void advance()     // going forwards
     
 void softTurnL() 
 {
-  analogWrite(Lpwm_pin, 50); // замедлить левое колесо
-  analogWrite(Rpwm_pin, 200); 
+  Set_Speed(50, 200); 
   digitalWrite(pinRB, LOW);
   digitalWrite(pinRF, HIGH);
   digitalWrite(pinLB, LOW);
@@ -66,8 +65,7 @@ void softTurnL()
 
 void softTurnR() 
 {
-  analogWrite(Lpwm_pin, 200);
-  analogWrite(Rpwm_pin, 50); // замедлить правое колесо
+  Set_Speed(200, 50);
   digitalWrite(pinRB, LOW);
   digitalWrite(pinRF, HIGH);
   digitalWrite(pinLB, LOW);
@@ -105,26 +103,26 @@ void loop()
   Sensor_Scan();
   if (SM == HIGH)// middle sensor in black area
   {
-    if (SL == LOW && SR == HIGH) // black on left, white on right, turn left
+    if (SL == LOW && SR == HIGH) // black on right, white on left, turn right
     {
       softTurnR();
     }
-    else if (SL == HIGH && SR == LOW) // white on left, black on right, turn right
+    else if (SL == HIGH && SR == LOW) // white on right, black on left, turn left
     {
       softTurnL();
     }
-    else // white on both sides, going forward
+    else // white or black on both sides, going forward
     {
       advance();
     }
   }
   else // middle sensor on white area
   {
-    if (SL== LOW && SR == HIGH)// black on left, white on right, turn left
+    if (SL== LOW && SR == HIGH)// black on right, white on left, turn right
     {
       softTurnR();
     }
-    else if (SL == HIGH && SR == LOW) // white on left, black on right, turn right
+    else if (SL == HIGH && SR == LOW) // white on right, black on left, turn left
     {
       softTurnL();
     }
